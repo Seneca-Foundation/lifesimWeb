@@ -1,4 +1,4 @@
-package dev.doomteam.lifesimweb;
+package com.senecafoundation.lifesimweb;
 
 import org.springframework.data.annotation.Id;
 
