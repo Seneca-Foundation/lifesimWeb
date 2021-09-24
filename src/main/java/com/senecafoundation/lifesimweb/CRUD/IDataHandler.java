@@ -1,10 +1,9 @@
 package com.senecafoundation.lifesimweb.CRUD;
+public interface IDataHandler<T> { 
 
-import com.senecafoundation.lifesimweb.Player;
+    public void create(T objectToSave);
+    public T read() throws Exception;
+    public T update(T objectToUpdate);
+    public void delete(T objectToDelete) throws Exception;
 
-public interface IDataHandler { 
-    public void createPlayer(Player player);
-    public Player readPlayer() throws Exception;
-    public Player updatePlayer(Player player);
-    public void deletePlayer(Player player) throws Exception;
 }

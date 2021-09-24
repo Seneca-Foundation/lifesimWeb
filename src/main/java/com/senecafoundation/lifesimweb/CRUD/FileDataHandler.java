@@ -9,8 +9,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 import com.senecafoundation.lifesimweb.Player;
-
-public class FileDataHandler implements IDataHandler {
+public class FileDataHandler implements IDataHandler<Player> {
 
 	private String fileLocation;
 	private File file;
@@ -27,7 +26,7 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public void createPlayer(Player player) {
+	public void create(Player player) {
 		BufferedWriter bw;
 		try {
 			bw = new BufferedWriter(new FileWriter(this.fileLocation, true));
@@ -41,7 +40,7 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public Player readPlayer() throws Exception {
+	public Player read() throws Exception {
 		if (this.file != null) {
 			try {
 				this.scanner = new Scanner(this.file);
@@ -61,19 +60,19 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public Player updatePlayer(Player player) {
+	public Player update(Player player) {
 
 		try {
-			this.deletePlayer(player);
+			this.delete(player);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.createPlayer(player);
+		this.create(player);
 		return player;
 	}
 
 	@Override
-	public void deletePlayer(Player player) throws Exception {
+	public void delete(Player player) throws Exception {
 			if (this.file != null) {
 				try {
 					this.scanner = new Scanner(this.file);
@@ -88,32 +87,4 @@ public class FileDataHandler implements IDataHandler {
 				}
 			}
 		}
-
 	}
-
-	// BufferedWriter bw;
-	// try
-	// {
-	// bw = new BufferedWriter(new FileWriter(this.fileLocation));
-	// lines.forEach(lineToWrite ->
-	// {
-	// try
-	// {
-	// bw.write(lineToWrite);
-	// bw.newLine();
-	// } catch (IOException e)
-	// {
-	// e.printStackTrace();
-	// }
-	// }
-	// );
-	// bw.flush();
-	// bw.close();
-	// return true;
-	// } catch (IOException e1)
-	// {
-	// e1.printStackTrace();
-	// }
-	// // We throw a custom error here if we can't find anything with that ID
-	// throw new Exception("Item not found with that ID");
-	// }

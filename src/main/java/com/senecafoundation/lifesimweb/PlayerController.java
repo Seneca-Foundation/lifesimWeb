@@ -31,7 +31,7 @@ public class PlayerController {
         if (result.hasErrors()) {
             return "error";
         }
-        repo.createPlayer(player);
+        repo.create(player);
         model.addAttribute("player", player);
         return "player";
     }

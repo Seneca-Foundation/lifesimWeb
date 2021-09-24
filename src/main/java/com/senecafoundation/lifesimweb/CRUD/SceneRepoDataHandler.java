@@ -1,34 +1,34 @@
 package com.senecafoundation.lifesimweb.CRUD;
 
-import com.senecafoundation.lifesimweb.Player;
+import com.senecafoundation.lifesimweb.Scene;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlayerRepoDataHandler implements IDataHandler<Player> {
+public class SceneRepoDataHandler implements IDataHandler<Scene> {
     @Autowired
-    PlayerRepository repo;
+    SceneRepository repo;
 
     @Override
-    public void create(Player player) {
-        repo.save(player);        
+    public void create(Scene scene) {
+        repo.save(scene);        
     }
 
     @Override
-    public Player read() throws Exception {
+    public Scene read() throws Exception {
         // TODO Auto-generated method stub
-        return null;
+        return scene;
     }
 
     @Override
-    public Player update(Player player) {
+    public Scene update(Scene scene) {
         // TODO Auto-generated method stub
-        return null;
+        return scene;
     }
 
     @Override
-    public void delete(Player player) throws Exception {
+    public void delete(Scene scene) throws Exception {
         // TODO Auto-generated method stub
         
     }
