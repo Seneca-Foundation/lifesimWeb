@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Scene implements IScene {
-	private UUID id;
+	private String id;
 	private String question;
 	private ArrayList<String> choices;
 	private ArrayList<Integer> choicePoints;
@@ -36,7 +36,18 @@ public class Scene implements IScene {
 		this.nextScene = nextScene;
 	}	
     
-	public String getTextColor() {
+	public Scene() {
+    }
+
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+    public String getTextColor() {
 		return textColor;
 	}
 
@@ -53,11 +64,11 @@ public class Scene implements IScene {
 	}
 
 	public UUID getId() {
-		return id;
+		return UUID.fromString(this.id);
 	}
 
 	public void setId(UUID id) {
-		this.id = id;
+		this.id = id.toString();
 	}
 
 	@Override

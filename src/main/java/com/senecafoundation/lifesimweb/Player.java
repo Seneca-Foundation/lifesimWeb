@@ -1,7 +1,5 @@
 package com.senecafoundation.lifesimweb;
 
-import java.util.UUID;
-
 import org.springframework.data.annotation.Id;
 
 public class Player implements IPlayer {
@@ -15,11 +13,11 @@ public class Player implements IPlayer {
 	private Gender gender;
 	private int reputation;
 	
-	public Player(int age, Gender gender, int reputation, UUID uuid) {
+	public Player(int age, Gender gender, int reputation, String uuid) {
 		this.age = age;
 		this.gender = gender;
 		this.reputation = reputation;
-		this.uuid = uuid.toString();
+		this.uuid = uuid;
 	}
 
 	public Player() {
@@ -46,10 +44,10 @@ public class Player implements IPlayer {
 	public String toString() {
 		return this.getAge() + "," + this.getGender() + "," + this.getReputation() + "," + this.getUuid();
 	}
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid.toString();
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
-	public UUID getUuid() {
-		return UUID.fromString(this.uuid);
+	public String getUuid() {
+		return this.uuid;
 	}
 }

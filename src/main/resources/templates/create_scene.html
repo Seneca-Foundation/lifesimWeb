@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create a Scene</title>
+</head>
+    <body>
+        <h3>Welcome, Enter a Scene</h3>
+        <form action="#" th:action="@{/scene/createform}" method="post" th:object="${scene}">
+             <table> 
+                <tr>
+                    <td><label>Question</label></td>
+                    <td><input type="text" th:field="*{question}" /></td>
+                </tr>
+                <tr>
+                    <td><label>Text Color</label></td>
+                    <td><input type="text" th:field="*{textColor}" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit"/></td>
+                </tr>
+            </table>
+        </form:form>
+    </body>
+</html>

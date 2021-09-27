@@ -5,11 +5,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
-
+import com.senecafoundation.lifesimweb.IPlayer;
 import com.senecafoundation.lifesimweb.Player;
-public class FileDataHandler implements IDataHandler<Player> {
+public class FileDataHandler implements IDataHandler {
 
 	private String fileLocation;
 	private File file;
@@ -26,7 +27,7 @@ public class FileDataHandler implements IDataHandler<Player> {
 	}
 
 	@Override
-	public void create(Player player) {
+	public void create(IPlayer player) {
 		BufferedWriter bw;
 		try {
 			bw = new BufferedWriter(new FileWriter(this.fileLocation, true));
@@ -40,7 +41,7 @@ public class FileDataHandler implements IDataHandler<Player> {
 	}
 
 	@Override
-	public Player read() throws Exception {
+	public IPlayer read(String id) throws Exception {
 		if (this.file != null) {
 			try {
 				this.scanner = new Scanner(this.file);
@@ -50,20 +51,22 @@ public class FileDataHandler implements IDataHandler<Player> {
 			while (this.scanner != null && this.scanner.hasNextLine()) {
 				String line = this.scanner.nextLine();
 				String[] props = line.split(","); 
-				// if (line.indexOf(UUID.fromString(props[3])) != -1) {
-					return new Player(Integer.parseInt(props[0]), Player.Gender.valueOf(props[1]),
-					Integer.parseInt(props[2]), UUID.fromString(props[3]));
-				// }
+				if (props[0].equals("Player")) {
+					Player playerToReturn = new Player(Integer.parseInt(props[0]), Player.Gender.valueOf(props[1]),
+					Integer.parseInt(props[2]), props[3]);
+					playerToReturn.setUuid(props[0]);
+				}
 			}
 		}
-		return new Player(18, Player.Gender.MALE, 0, UUID.randomUUID());
+        // We throw a custom error here if we can't find anything with that ID
+        throw new Exception("Item not found with that ID");
 	}
 
 	@Override
-	public Player update(Player player) {
+	public IPlayer update(IPlayer player) {
 
 		try {
-			this.delete(player);
+			this.delete(((Player) player).getUuid());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,19 +75,40 @@ public class FileDataHandler implements IDataHandler<Player> {
 	}
 
 	@Override
-	public void delete(Player player) throws Exception {
-			if (this.file != null) {
-				try {
-					this.scanner = new Scanner(this.file);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				while (this.scanner != null && this.scanner.hasNextLine()) {
-					String line = this.scanner.nextLine();
-					if (line.indexOf(player.getUuid().toString()) != -1) {
-						// this should delete the line
-					}
-				}
-			}
-		}
+	public Boolean delete(String id) throws Exception {
+        //now read the file line by line...
+        ArrayList<String> lines = new ArrayList<String>();
+        if (this.file != null) {
+            this.scanner = new Scanner(this.file);
+            while (this.scanner != null && this.scanner.hasNextLine()) {
+                String line = this.scanner.nextLine();
+                if(!line.contains(id.toString())) { 
+                    lines.add(line);
+                }
+            }
+        }
+
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter(this.fileLocation));
+            lines.forEach(lineToWrite ->
+                { 
+                    try {
+                        bw.write(lineToWrite);
+                        bw.newLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            );
+            bw.flush();
+            bw.close();
+            return true;
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        // We throw a custom error here if we can't find anything with that ID
+        throw new Exception("Item not found with that ID");
 	}
+
+}
