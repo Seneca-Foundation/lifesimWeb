@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create a Player</title>
+</head>
+    <body>
+        <h3>Welcome, Enter a Player</h3>
+        <form action="#" th:action="@{/player/createform}" method="post" th:object="${player}">
+             <table> 
+                <tr>
+                    <td><label>Age</label></td>
+                    <td><input type="text" th:field="*{age}" /></td>
+                </tr>
+                <tr>
+                    <td><label>Gender</label></td>
+                    <td><input type="text" th:field="*{gender}" /></td>
+                </tr>  
+                <tr>
+                    <td><label>Reputation</label></td>
+                    <td><input type="text" th:field="*{reputation}" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit"/></td>
+                </tr>
+            </table>
+        </form:form>
+    </body>
+</html>
