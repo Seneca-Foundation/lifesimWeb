@@ -1,7 +1,7 @@
 package com.senecafoundation.lifesimweb;
 
-import java.io.Console;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Scene implements IScene {
@@ -12,11 +12,10 @@ public class Scene implements IScene {
 	private ArrayList<String> responses;
 	private Player playerCharacter;
 	private String textColor;
-	private ArrayList<UUID> nextScene;
-	Console c;
+	private ArrayList<String> nextScene;
 	
 	public Scene(
-		UUID id, 
+		String id, 
 		String question, 
 		ArrayList<String> choices, 
 		ArrayList<Integer> choicePoints,
@@ -24,7 +23,7 @@ public class Scene implements IScene {
 		ArrayList<String> responses, 
 		Player playerCharacter, 
 		String textColor, 
-		ArrayList<UUID> nextScene
+		ArrayList<String> nextScene
 	) {
 		this.setId(id);
 		this.question = question;
@@ -63,35 +62,26 @@ public class Scene implements IScene {
 		this.playerCharacter = playerCharacter;
 	}
 
-	public UUID getId() {
-		return UUID.fromString(this.id);
+	public String getId() {
+		return this.id;
 	}
 
-	public void setId(UUID id) {
-		this.id = id.toString();
-	}
-
-	@Override
-	//asks the question
-	public void printQuestion() {
-		System.out.println(question);	
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Override
-	//prints the choices
-	public void printChoices() {
-		for(String choice : choices){
-			System.out.println(choice);
-		}
+	public String printQuestion() {
+		return question;	
 	}
 
 	@Override
+	public List<String> printChoices() {
+		return choices;
+	}
 
-	//gets the selections
-	public int getUserChoiceSelection(Console c) {
-		System.out.println("You can enter the choice number, from 0 to " + responses.size() );
-		int userChoiceSelection = Integer.parseInt(c.readLine()); //maybe later we can also enter the choice by name
-		return userChoiceSelection;
+	public String getChoicePrompt() {
+		return "You can enter the choice number, from 0 to " + responses.size();
 	}
 
 	@Override
@@ -106,10 +96,9 @@ public class Scene implements IScene {
 		return points;
 	}
 	
-
 	@Override
-	public UUID getNextScene(int responseIndex) {
-		UUID UUIDtoReturn = nextScene.get(responseIndex);
+	public String getNextScene(int responseIndex) {
+		String UUIDtoReturn = nextScene.get(responseIndex);
 		return UUIDtoReturn;	
 	}
 	

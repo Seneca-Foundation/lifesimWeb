@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 import com.senecafoundation.lifesimweb.IPlayer;
 import com.senecafoundation.lifesimweb.Player;
 public class FileDataHandler implements IDataHandler {

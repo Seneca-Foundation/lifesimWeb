@@ -2,7 +2,6 @@ package com.senecafoundation.lifesimweb.CRUD;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import com.senecafoundation.lifesimweb.IPlayer;
 import com.senecafoundation.lifesimweb.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +40,11 @@ public class PlayerRepoDataHandler<T extends Player> implements IDataHandler {
     public Boolean delete(String id) throws Exception {
         repo.deleteById(id.toString());
         return true;
+    }
+
+    public void read(Player player) {
+    }
+
+    public void update(String id) {
     }
 }

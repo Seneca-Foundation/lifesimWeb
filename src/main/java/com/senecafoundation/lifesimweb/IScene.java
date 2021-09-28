@@ -1,12 +1,11 @@
 package com.senecafoundation.lifesimweb;
 
+import java.util.List;
 import java.util.UUID;
-import java.io.Console;
 
 public interface IScene {
-	void printQuestion();
-	void printChoices();
-	int getUserChoiceSelection(Console c);
+	String printQuestion();
+	List<String> printChoices();
 	String getAppropriateResponse(int responseIndex);
-	UUID getNextScene(int responseIndex);
+	String getNextScene(int responseIndex);
 }

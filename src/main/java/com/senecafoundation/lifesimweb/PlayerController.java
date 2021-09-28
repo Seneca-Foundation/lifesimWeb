@@ -1,7 +1,6 @@
 package com.senecafoundation.lifesimweb;
 
 import java.util.List;
-import java.util.UUID;
 import com.senecafoundation.lifesimweb.CRUD.PlayerRepoDataHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,21 +37,39 @@ public class PlayerController {
         return "player";
     }
 
-    @GetMapping("/deleteform")
-    public String showFormDelete(Model model){
+    @GetMapping("/updateform")
+    public String showFormUpdate(Model model){
         List<IPlayer> playerList = dataHandler.ReadAll(); 
         model.addAttribute("playerList", playerList);
-        return "delete_player";
+        return "update_player";
     }
 
-    @RequestMapping(value = "/deleteform/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/updateform/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") String Id, ModelMap model) {
         try {
-            dataHandler.delete(Id);
+            dataHandler.update(Id);
         } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("Id", Id);
-        return "itemdelete";
+        return "itemupdate";
     }
+
+    @GetMapping("/readform")
+    public String showReadForm(Model model) {
+        Player player = new Player();
+        model.addAttribute("player", player);
+        return "read_player";
+    }
+    @RequestMapping(value = "/readform", method = RequestMethod.POST)
+    public String submitRead(@ModelAttribute("player") Player player, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            return "error";
+        }
+        dataHandler.read(player);
+        model.addAttribute("player",player);
+        return "player";
+    }
+
+
 }

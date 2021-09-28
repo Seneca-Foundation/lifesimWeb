@@ -14,10 +14,10 @@ public class SceneRepoDataHandler<T extends Scene> {
     SceneRepository repo;
 
     public void create(IScene scene) {
-        repo.save((T) scene);        
+        repo.save((T)scene);        
     }
 
-    public IScene read(UUID id) throws Exception {
+    public IScene read(String id) throws Exception {
         return repo.findById(id.toString()).orElseThrow();
     }
 
@@ -25,7 +25,13 @@ public class SceneRepoDataHandler<T extends Scene> {
         return repo.save((Scene) player);
     }
 
-    public void delete(UUID id) throws Exception {
+    public void delete(String id) throws Exception {
         repo.deleteById(id.toString());
+    }
+
+    public void read(Scene scene) {
+    }
+
+    public void delete(Scene scene) {
     }
 }
