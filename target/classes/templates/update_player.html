@@ -5,7 +5,7 @@
 </head>
     <body>
         <h3>Welcome, Update a Player</h3>
-        <form action="#" th:action="@{/player/updateform/}" method="GET" th:object="${player}">
+        <form action="#" th:action="@{/player/updateform}" method="POST" th:object="${player}">
             <input type="hidden" th:field="*{id}" />
              <table> 
                 <tr>

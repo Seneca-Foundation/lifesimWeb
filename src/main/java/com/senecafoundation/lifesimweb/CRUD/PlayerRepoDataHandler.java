@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PlayerRepoDataHandler<T extends Player> implements IDataHandler {
-    
+
     @Autowired
     PlayerRepository repo;
 
     @Override
     public void create(IPlayer player) {
-        repo.save((T) player);        
+        repo.save((T) player);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class PlayerRepoDataHandler<T extends Player> implements IDataHandler {
             listOfItemsToReturn.add(player);
         }
         return listOfItemsToReturn;
-    }    
+    }
 
     @Override
     public Player update(IPlayer player) {

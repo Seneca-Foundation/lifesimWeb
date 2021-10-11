@@ -1,12 +1,12 @@
 package com.senecafoundation.lifesimweb;
 
-import java.util.List;
 import com.senecafoundation.lifesimweb.CRUD.PlayerRepoDataHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,14 +37,6 @@ public class PlayerController {
         return "player";
     }
 
-    // @RequestMapping(value = "/updateform/{id}", method = RequestMethod.GET)
-    // public String showUpdateForm(@PathVariable("id") String Id, Model model)
-    // throws Exception {
-    // Scene scene = (Scene) dataHandler.read(Id);
-    // model.addAttribute("player", player);
-    // return "update_player";
-    // }
-
     @RequestMapping(value = "/updateform/{id}", method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") String Id, Model model) throws Exception {
         Player player = (Player) dataHandler.read(Id);
@@ -52,8 +44,8 @@ public class PlayerController {
         return "update_player";
     }
 
-    @RequestMapping(value = "/updateform/{id}", method = RequestMethod.POST)
-    public String submitUpdate(@ModelAttribute("player") Player player, BindingResult result, ModelMap model) {
+    @RequestMapping(value = "/updateform", method = RequestMethod.POST)
+    public String showUpdateForm(@ModelAttribute("player") Player player, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
