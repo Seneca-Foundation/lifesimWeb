@@ -54,21 +54,16 @@ public class PlayerController {
         return "player";
     }
 
-    @GetMapping("/readform")
-    public String showReadForm(Model model) {
-        Player player = new Player();
-        model.addAttribute("player", player);
-        return "read_player";
-    }
-
-    @RequestMapping(value = "/readform", method = RequestMethod.POST)
-    public String submitRead(@ModelAttribute("player") Player player, BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "error";
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String showFormRead(@PathVariable("id") String Id, Model model, Object Player) {
+        Player player;
+        try {
+            Player = (Player) dataHandler.read(Id);
+            model.addAttribute("player", Player);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
-        dataHandler.read(player);
-        model.addAttribute("player", player);
         return "player";
     }
-
 }
