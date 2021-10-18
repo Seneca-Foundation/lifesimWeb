@@ -2,6 +2,8 @@ package com.senecafoundation.lifesimweb.CRUD;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import com.senecafoundation.lifesimweb.IPlayer;
 import com.senecafoundation.lifesimweb.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,8 @@ public class PlayerRepoDataHandler<T extends Player> implements IDataHandler {
     }
 
     @Override
-    public Player read(String id) throws Exception {
-        return repo.findById(id).orElseThrow();
+    public Player read(String uuid) throws Exception {
+        return repo.findById(uuid).orElseThrow();
     }
 
     public List<IPlayer> ReadAll() {
@@ -47,4 +49,9 @@ public class PlayerRepoDataHandler<T extends Player> implements IDataHandler {
 
     public void update(String id) {
     }
+
+    public Player Read(UUID fromString) {
+        return null;
+    }
+
 }
