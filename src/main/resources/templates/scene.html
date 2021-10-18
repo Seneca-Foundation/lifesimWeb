@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title th:text="${scene.id}"></title>
+<link th:href="@{/css/main.css}" rel="stylesheet" /> 
+</head>
+<body>
+    <div class="response">
+        <h1 th:text="'Scene Question: ' + ${scene.question}"></h1>
+        <p th:text="'Scene Text Color: ' + ${scene.textColor}"></p>
+    </div>
+</body>
+</html> 
