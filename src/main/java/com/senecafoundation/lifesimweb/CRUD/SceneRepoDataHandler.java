@@ -1,7 +1,5 @@
 package com.senecafoundation.lifesimweb.CRUD;
 
-import java.util.UUID;
-
 import com.senecafoundation.lifesimweb.IScene;
 import com.senecafoundation.lifesimweb.Scene;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ public class SceneRepoDataHandler<T extends Scene> {
     SceneRepository repo;
 
     public void create(IScene scene) {
-        repo.save((T)scene);        
+        repo.save((T) scene);
     }
 
     public IScene read(String id) throws Exception {

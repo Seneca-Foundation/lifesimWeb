@@ -1,12 +1,12 @@
 package com.senecafoundation.lifesimweb;
 
 import com.senecafoundation.lifesimweb.CRUD.SceneRepoDataHandler;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,8 @@ public class SceneController {
 
     @Autowired
     SceneRepoDataHandler<Scene> dataHandler;
-    
+    private Errors result;
+
     @GetMapping("/createform")
     public String showForm(Model model) {
         Scene scene = new Scene();
@@ -37,23 +38,22 @@ public class SceneController {
         return "scene";
     }
 
-    @GetMapping("/readform")
-    public String showReadForm(Model model) {
-        Scene scene = new Scene();
-        model.addAttribute("scene", scene);
-        return "read_scene";
-    }
-
-    @RequestMapping(value = "/readform", method = RequestMethod.POST)
-    public String submitRead(@ModelAttribute("scene") Scene scene, BindingResult result, ModelMap model) {
+    @RequestMapping(value = "/readform/{id}", method = RequestMethod.GET)
+    public String getRead(@PathVariable("id") String Id, Model model) {
         if (result.hasErrors()) {
             return "error";
         }
-        dataHandler.read(scene);
-        model.addAttribute("scene", scene);
+        Scene scene;
+        try {
+            scene = (Scene) dataHandler.read(Id);
+            model.addAttribute("scene", scene);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return "scene";
     }
- 
+
     @RequestMapping(value = "/updateform/{id}", method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") String Id, Model model) throws Exception {
         Scene scene = (Scene) dataHandler.read(Id);

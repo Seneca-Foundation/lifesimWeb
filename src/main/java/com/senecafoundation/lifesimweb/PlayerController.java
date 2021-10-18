@@ -1,12 +1,12 @@
 package com.senecafoundation.lifesimweb;
 
-import java.util.List;
 import com.senecafoundation.lifesimweb.CRUD.PlayerRepoDataHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,7 @@ public class PlayerController {
 
     @Autowired
     PlayerRepoDataHandler<Player> dataHandler;
-    
+
     @GetMapping("/createform")
     public String showForm(Model model) {
         Player player = new Player();
@@ -37,22 +37,21 @@ public class PlayerController {
         return "player";
     }
 
-    @GetMapping("/updateform")
-    public String showFormUpdate(Model model){
-        List<IPlayer> playerList = dataHandler.ReadAll(); 
-        model.addAttribute("playerList", playerList);
+    @RequestMapping(value = "/updateform/{id}", method = RequestMethod.GET)
+    public String showUpdateForm(@PathVariable("id") String Id, Model model) throws Exception {
+        Player player = (Player) dataHandler.read(Id);
+        model.addAttribute("player", player);
         return "update_player";
     }
 
-    @RequestMapping(value = "/updateform/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") String Id, ModelMap model) {
-        try {
-            dataHandler.update(Id);
-        } catch (Exception e) {
-            e.printStackTrace();
+    @RequestMapping(value = "/updateform", method = RequestMethod.POST)
+    public String showUpdateForm(@ModelAttribute("player") Player player, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            return "error";
         }
-        model.addAttribute("Id", Id);
-        return "itemupdate";
+        dataHandler.update(player);
+        model.addAttribute("player", player);
+        return "player";
     }
 
     @GetMapping("/readform")
@@ -61,15 +60,15 @@ public class PlayerController {
         model.addAttribute("player", player);
         return "read_player";
     }
+
     @RequestMapping(value = "/readform", method = RequestMethod.POST)
     public String submitRead(@ModelAttribute("player") Player player, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
         dataHandler.read(player);
-        model.addAttribute("player",player);
+        model.addAttribute("player", player);
         return "player";
     }
-
 
 }
