@@ -58,12 +58,12 @@ public class PlayerController {
     public String showFormRead(@PathVariable("id") String Id, Model model, Object Player) {
         Player player;
         try {
-            Player = (Player) dataHandler.Read(Id.fromString(Id));
+            Player = (Player) dataHandler.read(Id);
             model.addAttribute("player", Player);
         } catch (Exception e)
         {
             e.printStackTrace();
         }
-        return "create_player";
+        return "player";
     }
 }
