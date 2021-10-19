@@ -2,7 +2,6 @@ package com.senecafoundation.lifesimweb;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Scene implements IScene {
 	private String id;

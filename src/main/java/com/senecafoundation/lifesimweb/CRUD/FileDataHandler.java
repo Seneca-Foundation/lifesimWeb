@@ -26,7 +26,7 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public void create(IPlayer player) {
+	public void Create(IPlayer player) {
 		BufferedWriter bw;
 		try {
 			bw = new BufferedWriter(new FileWriter(this.fileLocation, true));
@@ -40,7 +40,7 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public IPlayer read(String id) throws Exception {
+	public IPlayer Read(String id) throws Exception {
 		if (this.file != null) {
 			try {
 				this.scanner = new Scanner(this.file);
@@ -53,7 +53,7 @@ public class FileDataHandler implements IDataHandler {
 				if (props[0].equals("Player")) {
 					Player playerToReturn = new Player(Integer.parseInt(props[0]), Player.Gender.valueOf(props[1]),
 					Integer.parseInt(props[2]), props[3]);
-					playerToReturn.setUuid(props[0]);
+					playerToReturn.setId(props[0]);
 				}
 			}
 		}
@@ -62,19 +62,19 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public IPlayer update(IPlayer player) {
+	public IPlayer Update(IPlayer player) {
 
 		try {
-			this.delete(((Player) player).getUuid());
+			this.Delete(((Player) player).getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.create(player);
+		this.Create(player);
 		return player;
 	}
 
 	@Override
-	public Boolean delete(String id) throws Exception {
+	public Boolean Delete(String id) throws Exception {
         //now read the file line by line...
         ArrayList<String> lines = new ArrayList<String>();
         if (this.file != null) {

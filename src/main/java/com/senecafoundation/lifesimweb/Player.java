@@ -8,16 +8,16 @@ public class Player implements IPlayer {
 		MALE, FEMALE, NONBINARY
 	}
 	@Id
-	private String uuid;
+	private String Id;
 	private int age;
 	private Gender gender;
 	private int reputation;
 	
-	public Player(int age, Gender gender, int reputation, String uuid) {
+	public Player(int age, Gender gender, int reputation, String Id) {
 		this.age = age;
 		this.gender = gender;
 		this.reputation = reputation;
-		this.uuid = uuid;
+		this.Id = Id;
 	}
 
 	public Player() {
@@ -42,12 +42,12 @@ public class Player implements IPlayer {
 		this.reputation = reputation;
 	}
 	public String toString() {
-		return this.getAge() + "," + this.getGender() + "," + this.getReputation() + "," + this.getUuid();
+		return this.getAge() + "," + this.getGender() + "," + this.getReputation() + "," + this.getId();
 	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setId(String Id) {
+		this.Id = Id;
 	}
-	public String getUuid() {
-		return this.uuid;
+	public String getId() {
+		return this.Id;
 	}
 }

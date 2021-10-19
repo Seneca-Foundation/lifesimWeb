@@ -4,9 +4,9 @@ import com.senecafoundation.lifesimweb.IPlayer;
 
 public interface IDataHandler { 
 
-    public void create(IPlayer objectToSave);
-    public IPlayer read(String id) throws Exception;
-    public IPlayer update(IPlayer objectToUpdate);
-    public Boolean delete(String id) throws Exception;
+    public void Create(IPlayer objectToSave);
+    public IPlayer Read(String id) throws Exception;
+    public IPlayer Update(IPlayer objectToUpdate);
+    public Boolean Delete(String id) throws Exception;
 
 }

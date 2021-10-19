@@ -1,7 +1,6 @@
 package com.senecafoundation.lifesimweb;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface IScene {
 	String printQuestion();
