@@ -61,12 +61,9 @@ public class PlayerController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getRead(@PathVariable("id") String Id, Model model) {
-        if (result.hasErrors()) {
-            return "error";
-        }
         Player player;
         try {
-            player = (Player) dataHandler.Read(Id);
+            player = dataHandler.Read(Id);
             model.addAttribute("player", player);
         } catch (Exception e)
         {
@@ -82,8 +79,8 @@ public class PlayerController {
         return "delete_player";
     }
 
-    @RequestMapping(value = "/deleteform/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") String Id, ModelMap model) {
+    @RequestMapping(value = "/deleteform/{Id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("Id") String Id, ModelMap model) {
         try {
             Player playerGettingDeleted = dataHandler.Read(Id);
             dataHandler.Delete(Id);

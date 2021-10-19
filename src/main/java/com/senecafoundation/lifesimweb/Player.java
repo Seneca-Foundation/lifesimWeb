@@ -8,7 +8,7 @@ public class Player implements IPlayer {
 		MALE, FEMALE, NONBINARY
 	}
 	@Id
-	private String Id;
+	private String id;
 	private int age;
 	private Gender gender;
 	private int reputation;
@@ -17,7 +17,7 @@ public class Player implements IPlayer {
 		this.age = age;
 		this.gender = gender;
 		this.reputation = reputation;
-		this.Id = Id;
+		this.id = Id;
 	}
 
 	public Player() {
@@ -45,9 +45,9 @@ public class Player implements IPlayer {
 		return this.getAge() + "," + this.getGender() + "," + this.getReputation() + "," + this.getId();
 	}
 	public void setId(String Id) {
-		this.Id = Id;
+		this.id = Id;
 	}
 	public String getId() {
-		return this.Id;
+		return this.id;
 	}
 }

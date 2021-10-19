@@ -1,8 +1,6 @@
 package com.senecafoundation.lifesimweb.CRUD;
 
 import java.util.ArrayList;
-import java.util.UUID;
-
 import com.senecafoundation.lifesimweb.IPlayer;
 import com.senecafoundation.lifesimweb.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,8 @@ public class PlayerRepoDataHandler<T extends Player> implements IDataHandler {
     }
 
     @Override
-    public Player Read(String uuid) throws Exception {
-        return repo.findById(uuid).orElseThrow();
+    public Player Read(String Id) throws Exception {
+        return repo.findById(Id).orElseThrow();
     }
 
     public ArrayList<IPlayer> ReadAll() {
