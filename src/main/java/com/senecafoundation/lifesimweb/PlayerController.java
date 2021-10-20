@@ -1,9 +1,6 @@
 package com.senecafoundation.lifesimweb;
 
 import java.util.List;
-import java.util.UUID;
-
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.senecafoundation.lifesimweb.CRUD.PlayerRepoDataHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
