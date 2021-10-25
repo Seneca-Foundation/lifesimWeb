@@ -1,5 +1,6 @@
 package com.senecafoundation.lifesimweb;
 
+import java.util.List;
 import com.senecafoundation.lifesimweb.CRUD.PlayerRepoDataHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ public class PlayerController {
 
     @Autowired
     PlayerRepoDataHandler<Player> dataHandler;
+    private Errors result;
 
     @GetMapping("/createform")
     public String showForm(Model model) {
@@ -32,14 +34,14 @@ public class PlayerController {
         if (result.hasErrors()) {
             return "error";
         }
-        dataHandler.create(player);
+        dataHandler.Create(player);
         model.addAttribute("player", player);
         return "player";
     }
 
     @RequestMapping(value = "/updateform/{id}", method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") String Id, Model model) throws Exception {
-        Player player = (Player) dataHandler.read(Id);
+        Player player = (Player) dataHandler.Read(Id);
         model.addAttribute("player", player);
         return "update_player";
     }
@@ -49,21 +51,43 @@ public class PlayerController {
         if (result.hasErrors()) {
             return "error";
         }
-        dataHandler.update(player);
+        dataHandler.Update(player);
         model.addAttribute("player", player);
         return "player";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String showFormRead(@PathVariable("id") String Id, Model model, Object Player) {
+    public String getRead(@PathVariable("id") String Id, Model model) {
         Player player;
         try {
-            Player = (Player) dataHandler.read(Id);
-            model.addAttribute("player", Player);
+            player = dataHandler.Read(Id);
+            model.addAttribute("player", player);
         } catch (Exception e)
         {
             e.printStackTrace();
         }
         return "player";
     }
+
+    @GetMapping("/deleteform")
+    public String showFormDelete(Model model) {
+        List<IPlayer> playerList = dataHandler.ReadAll();
+        model.addAttribute("playerList", playerList);
+        return "delete_player";
+    }
+
+    @RequestMapping(value = "/deleteform/{Id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("Id") String Id, ModelMap model) {
+        try {
+            Player playerGettingDeleted = dataHandler.Read(Id);
+            dataHandler.Delete(Id);
+            model.addAttribute("playerGettingDeleted", playerGettingDeleted);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("Id", Id);
+        return "playerDelete";
+    }
+
 }
+

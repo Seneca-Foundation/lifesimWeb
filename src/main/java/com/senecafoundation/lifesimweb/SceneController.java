@@ -48,7 +48,6 @@ public class SceneController {
             scene = (Scene) dataHandler.read(Id);
             model.addAttribute("scene", scene);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "scene";
@@ -78,7 +77,7 @@ public class SceneController {
         return "delete_scene";
     }
 
-    @RequestMapping(value = "/deleteform", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteform", method = RequestMethod.DELETE)
     public String submitDelete(@ModelAttribute("scene") Scene scene, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";

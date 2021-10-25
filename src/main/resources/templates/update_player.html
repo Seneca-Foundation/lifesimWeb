@@ -6,7 +6,7 @@
     <body>
         <h3>Welcome, Update a Player</h3>
         <form action="#" th:action="@{/player/updateform}" method="POST" th:object="${player}">
-            <input type="hidden" th:field="*{uuid}" th:value="*{uuid}"/>
+            <input type="hidden" th:field="*{id}" th:value="*{id}"/>
              <table> 
                 <tr>
                     <td><label>Age</label></td>
