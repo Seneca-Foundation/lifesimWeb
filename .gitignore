@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 bin/
+.history/
 
 ### STS ###
 .apt_generated
