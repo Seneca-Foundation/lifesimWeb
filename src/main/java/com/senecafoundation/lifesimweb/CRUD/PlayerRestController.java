@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlayerRestController {
     
     @Autowired
-    @Qualifier("plantDataWriter")
+    @Qualifier("FileDataHandler")
     PlayerRepoDataHandler dataHandler;
 
     @PostMapping("/players")
-    Player newPlayers(@RequestBody Player newPlayers) {
+    Player newPlayer(@RequestBody Player newPlayers) {
         dataHandler.Create(newPlayers);
         return newPlayers;
     }
