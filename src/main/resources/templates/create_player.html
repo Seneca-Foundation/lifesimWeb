@@ -2,28 +2,72 @@
 <html lang="en">
 <head>
     <title>Create a Player</title>
-    <link rel="stylesheet" href="@{/css/home.css}">
+    <link rel="stylesheet" href="{/css/home.css}" />
 </head>
-    <body class="card"> 
+<div class="card">
+    <h2>Contact Us</h2>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text">
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="form-group">
+          <label>Surname</label>
+          <input type="text">
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text">
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text">
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="form-group">
+          <label>Message</label>
+          <textarea></textarea>
+        </div>
+      </div>
+  
+      <div class="col">
+        <input type="submit" value="Submit">
+      </div>
+    </div>
+  </div>
         <h2>Welcome, Enter a Player</h2>
-        <form action="#" th:action="@{/player/createform}" method="post" th:object="${player}">
-             <table> 
-                <tr>
-                    <td><label>Age</label></td>
-                    <td><input type="text" th:field="*{age}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Gender</label></td>
-                    <td><input type="text" th:field="*{gender}" /></td>
-                </tr>  
-                <tr>
-                    <td><label>Reputation</label></td>
-                    <td><input type="text" th:field="*{reputation}" /></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Submit"/></td>
-                </tr>
-            </table>
-        </form:form>
+        <div class="card">
+            <form action="#" th:action="@{/player/createform}" method="post" th:object="${player}">
+                <table> 
+                    <tr>
+                        <td><label>Age</label></td>
+                        <td><input type="text" th:field="*{age}" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Gender</label></td>
+                        <td><input type="text" th:field="*{gender}" /></td>
+                    </tr>  
+                    <tr>
+                        <td><label>Reputation</label></td>
+                        <td><input type="text" th:field="*{reputation}" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Submit"/></td>
+                    </tr>
+                </table>
+            </form:form>
+        </div>  <!-- end of card -->
     </body>
 </html>
