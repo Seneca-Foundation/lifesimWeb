@@ -6,7 +6,7 @@
     <body>
         <h3>Welcome, Update a Scene</h3>
         <form action="#" th:action="@{/scene/updateform}" method="post" th:object="${scene}">
-            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{id}" th:value="*{id}"/>
             <table> 
                 <tr>
                     <td><label>Question</label></td>
