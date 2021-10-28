@@ -1,5 +1,7 @@
 package com.senecafoundation.lifesimweb.CRUD;
 
+import java.util.List;
+
 import com.senecafoundation.lifesimweb.IScene;
 import com.senecafoundation.lifesimweb.Scene;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +13,23 @@ public class SceneRepoDataHandler<T extends Scene> {
     @Autowired
     SceneRepository repo;
 
-    public void create(IScene scene) {
+    public void Create(IScene scene) {
         repo.save((T) scene);
     }
 
-    public IScene read(String id) throws Exception {
+    public Scene Read(String id) throws Exception {
         return repo.findById(id.toString()).orElseThrow();
     }
 
-    public IScene update(IScene player) {
+    public IScene Update(IScene player) {
         return repo.save((Scene) player);
     }
 
-    public void delete(String id) throws Exception {
+    public void Delete(String id) throws Exception {
         repo.deleteById(id.toString());
     }
 
-    public void read(Scene scene) {
-    }
-
-    public void delete(Scene scene) {
+    public List<IScene> ReadAll() {
+        return null;
     }
 }

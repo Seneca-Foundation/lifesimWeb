@@ -1,5 +1,7 @@
 package com.senecafoundation.lifesimweb;
 
+import java.util.List;
+
 import com.senecafoundation.lifesimweb.CRUD.SceneRepoDataHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,7 @@ public class SceneController {
         if (result.hasErrors()) {
             return "error";
         }
-        dataHandler.create(scene);
+        dataHandler.Create(scene);
         model.addAttribute("scene", scene);
         return "scene";
     }
@@ -45,7 +47,7 @@ public class SceneController {
         }
         Scene scene;
         try {
-            scene = (Scene) dataHandler.read(Id);
+            scene = (Scene) dataHandler.Read(Id);
             model.addAttribute("scene", scene);
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,36 +57,39 @@ public class SceneController {
 
     @RequestMapping(value = "/updateform/{id}", method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") String Id, Model model) throws Exception {
-        Scene scene = (Scene) dataHandler.read(Id);
+        Scene scene = (Scene) dataHandler.Read(Id);
         model.addAttribute("scene", scene);
         return "update_scene";
     }
 
     @RequestMapping(value = "/updateform", method = RequestMethod.POST)
-    public String submitUpdate(@ModelAttribute("scene") Scene scene, BindingResult result, ModelMap model) {
+    public String showUpdateForm(@ModelAttribute("scene") Scene scene, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
-        dataHandler.update(scene);
+        dataHandler.Update(scene);
         model.addAttribute("scene", scene);
         return "scene";
     }
 
     @GetMapping("/deleteform")
     public String showDeleteForm(Model model) {
-        Scene scene = new Scene();
-        model.addAttribute("scene", scene);
+        List<IScene> sceneList = dataHandler.ReadAll();
+        model.addAttribute("sceneList", sceneList);
         return "delete_scene";
     }
 
-    @RequestMapping(value = "/deleteform", method = RequestMethod.DELETE)
-    public String submitDelete(@ModelAttribute("scene") Scene scene, BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "error";
+    @RequestMapping(value = "/deleteform/{Id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("Id") String Id, ModelMap model) {
+        try {
+            Scene sceneGettingDeleted = dataHandler.Read(Id);
+            dataHandler.Delete(Id);
+            model.addAttribute("sceneGettingDeleted", sceneGettingDeleted);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        dataHandler.delete(scene);
-        model.addAttribute("scene", scene);
-        return "scene";
+        model.addAttribute("Id", Id);
+        return "sceneDelete";
     }
 
 }
