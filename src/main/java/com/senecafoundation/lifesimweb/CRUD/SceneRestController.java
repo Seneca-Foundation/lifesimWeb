@@ -22,6 +22,7 @@ public class SceneRestController {
 
     @PostMapping("/scenes")
     Scene newScene(@RequestBody Scene newScenes) {
+        System.out.println("New Scene: " + newScenes);
         dataHandler.Create(newScenes);
         return newScenes;
     }

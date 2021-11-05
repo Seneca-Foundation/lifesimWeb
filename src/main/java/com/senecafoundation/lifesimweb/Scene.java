@@ -24,6 +24,7 @@ public class Scene implements IScene {
 		String textColor, 
 		ArrayList<String> nextScene
 	) {
+		System.out.println("Scene constructor");
 		this.setId(id);
 		this.question = question;
 		this.choices = choices;
@@ -32,6 +33,7 @@ public class Scene implements IScene {
 		this.setPlayerCharacter(playerCharacter);
 		this.setTextColor(textColor);
 		this.nextScene = nextScene;
+		System.out.println(this.responses.size());
 	}	
     
 	public Scene() {
@@ -80,7 +82,7 @@ public class Scene implements IScene {
 	}
 
 	public String getChoicePrompt() {
-		return "You can enter the choice number, from 0 to " + responses.size();
+		return "You can enter the choice number, from 0 to ";
 	}
 
 	@Override
